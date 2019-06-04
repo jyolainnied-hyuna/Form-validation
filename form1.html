@@ -1,0 +1,28 @@
+<script src="https://unpkg.com/vue"></script>
+<link rel="stylesheet" href="form.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+<div id="app">
+    <div class="container">
+            <div class="row">
+                <form id="form" @click="" class="col-sm-6 offset-sm-3">
+                    <label>Name</label><br/>
+                    <input ref="nameInput" @keyup="checkNameInput($event)" aria-required="true" aria-invalid="false" >
+                    <small>{{nameError}}</small>
+    
+                    <label>Email Address</label><br/>
+                    <input ref="emailInput" @keyup="checkEmailInput($event)" aria-required="true" aria-invalid="false">
+                    <small>{{emailError}}</small><br/>
+                    <div class="row">
+                        <button ref="formSubmit" @click.prevent="isValid" class="col-sm-4 offset-sm-4">{{sumbitBtn}}</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+</div>
+
+
+<script type="text/javascript" src="form.js"></script>
