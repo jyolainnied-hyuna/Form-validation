@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     data: {
         sumbitValue: false,
+        isValid: false,
         nameError: '',
         emailError: '',
         submittedUser: []
@@ -29,31 +30,28 @@ new Vue({
                 this.$refs.formSubmit.removeAttribute('disabled');
                 this.$refs.formSubmit.style.backgroundColor = '#3385ff';
                 
-                return true;
+                this.isValid = true;
             }
             else{
                 this.$refs.formSubmit.setAttribute('disabled', '');
                 this.$refs.formSubmit.style.backgroundColor = 'grey';
                 this.sumbitValue = false;
                 
-                return false;
+                this.isValid = false;
             }
         },
         checkNameInput: function(event)
         {
-            var valid = (event.target.value.length >= 5 ) ?  true : false;
+            var valid = (event.target.value.length >= 5  && /^[a-z]+$/.test(event.target.value.toLowerCase())) ?  true : false;
             if(!valid){
                 event.target.setAttribute("aria-invalid", "true");
-                this.nameError = 'Invalid: Name must be at least 5 characters long.';
+                this.nameError = 'Invalid: Name must be at least 5 letters long.';
                 event.target.style.border = '0.12em solid red';     //make red border around invalid input
            }
-           else if(valid){
+           else{
                 event.target.setAttribute("aria-invalid", "false");
                 this.nameError = '';
                 event.target.style.border = '0.12em solid green';     //make green border around valid input
-           }
-           else{
-                event.target.style.border = '0.1em  solid lightgrey';   //default input field border
            }
 
            this.checkSubmit();
@@ -61,29 +59,26 @@ new Vue({
         },
         checkEmailInput: function(event)
         {
-            var regex = RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]$');
+            var regex = RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}');
             var valid = regex.test(event.target.value.toLowerCase());
             if(!valid){
                 event.target.setAttribute("aria-invalid", "true");
                 this.emailError = 'Invalid email address';
                 event.target.style.border = '0.12em solid red';     //make red border around invalid input
             }
-            else if (valid){
+            else{
                 event.target.setAttribute("aria-invalid", "false");
                 this.emailError = '';
                 event.target.style.border = '0.12em solid green';     //make green border around valid input
-            }
-            else{
-                event.target.style.border = '0.1em  solid lightgrey';  //default input field border
             }
 
             this.checkSubmit();
 
         },
-        isValid: function()
+        checkValid: function()
         {
               //checks if form inputs are valid, push user object to submittedUser array
-              if(this.checkSubmit())
+              if(this.isValid)
               {
                 this.submittedUser.push({name: this.$refs.nameInput.value, email: this.$refs.emailInput.value});
                                   
@@ -92,6 +87,11 @@ new Vue({
                   
                   //update sumbitValue variable so that the value of button can change
                   this.sumbitValue = true;
+                  
+                  //reset input field
+                  this.$refs.nameInput.value = "";
+                  this.$refs.emailInput.value = "";
+                  
               }
         },
         setStorage: function()

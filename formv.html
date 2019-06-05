@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Form Validation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <form class="col-sm-6 offset-sm-3">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input id="name-input" aria-required="true" aria-invalid="false" onblur="isValid('name-input');" >
+                    <small id="name-error" ></small>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input id="email-input"  aria-required="true" aria-invalid="false" onblur="isValid('email-input');">
+                    <small id="email-error"></small>
+                </div>
+                
+                <button type="submit" class="col-sm-4 offset-sm-4">Submit</button>              
+            </form>
+        </div>
+    </div>
+    <script>
+        var nameInput = document.getElementById('name-input');
+        var emailInput = document.getElementById('email-input');
+        var nameError = document.getElementById('name-error');
+        var emailError = document.getElementById('email-error');
+        var form = document.querySelector('form');
+        var submitBtn = document.querySelector('button');
+        
+        var submittedUser = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')):[];
+        
+         //set Local storage item
+        localStorage.setItem('users', JSON.stringify(submittedUser));
+
+       //disabling submit button
+        submitBtn.setAttribute('disabled', '');
+        
+        //form listener for when form is submitted
+        form.addEventListener('submit', (event)=>
+        {
+            event.preventDefault();
+            
+            if(!checkSubmitBtn())
+            {
+                checkEmailInput(emailInput);
+                checkNameInput(nameInput);
+            }
+            else
+            {
+                submittedUser.push({name: nameInput.value, email: emailInput.value});            
+                
+                //update local storage item
+                localStorage.setItem('users', JSON.stringify(submittedUser));
+                
+                //Success state
+                submitBtn.style.backgroundColor = 'green';
+                submitBtn.innerHTML = 'Success';
+                
+                //reset field values
+                nameInput.value = '';
+                emailInput.value = '';
+            }    
+        });
+        
+         //form listener for focus on input fields
+        form.addEventListener('focus', (event)=>
+        {
+            event.target.style.background = '#e6f0ff';
+            event.target.style.border = '0.12em solid green';
+        },true)
+        
+        
+        function isValid(inputID)
+        {
+           var inputElement = document.getElementById(inputID);
+    
+           //checks the element and executes the appropriate function
+           (inputID == 'email-input') ? checkEmailInput(inputElement): checkNameInput(inputElement);    
+            
+            checkSubmitBtn();
+        }
+
+        function checkEmailInput(elem)
+        {
+            var regex = RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}');
+            var valid = regex.test(elem.value.toLowerCase());
+            if(!valid){
+                 //Error State
+                elem.setAttribute("aria-invalid", "true");
+                emailError.innerHTML = 'Invalid email address';
+                elem.style.border = '0.12em solid red';     //make red border around invalid input
+            }
+            else{
+                elem.setAttribute("aria-invalid", "false");
+                emailError.innerHTML = '';
+                elem.style.border = '0.12em solid green';     //make green border around valid input
+            }
+
+        }
+        
+        function checkNameInput(elem)
+        {
+             var valid = (elem.value.length >= 5 && /^[a-z]+$/.test(elem.value.toLowerCase()) ) ?  true : false;
+             if(!valid){
+                //Error State
+                elem.setAttribute("aria-invalid", "true");
+                nameError.innerHTML = 'Invalid: Name must be at least 5 letters long.';
+                elem.style.border = '0.12em solid red';     //make red border around invalid input
+            }
+            else{
+                elem.setAttribute("aria-invalid", "false");
+                nameError.innerHTML = '';
+                elem.style.border = '0.12em solid green';     //make green border around valid input
+            }
+
+        }
+        
+        //checks if form has valid input and if it does the disabled attribute is removed from button tag
+       function checkSubmitBtn()
+       {
+            if(nameInput.getAttribute("aria-invalid") === 'false' && emailInput.getAttribute("aria-invalid") === 'false' && nameInput.value != "" && emailInput.value != "")
+            {
+                //Valid form entries state
+                submitBtn.removeAttribute('disabled');
+                submitBtn.style.backgroundColor = '#3385ff';
+                submitBtn.style.border = 'none';
+                return true;
+            }
+            else{
+                //Default State
+                submitBtn.setAttribute('disabled', '');
+                submitBtn.style.backgroundColor = 'grey';   
+                submitBtn.style.border = 'none';
+                return false;
+            }
+       }
+   </script>   
+</body>
+</html>
