@@ -71,6 +71,34 @@
             }    
         });
         
+         //form listener for when user hits the 'enter' key
+        form.addEventListener("keyup", (event) => 
+        {
+          if (event.keyCode === 13) {
+            
+            if(!checkSubmitBtn())
+            {
+                checkEmailInput(emailInput);
+                checkNameInput(nameInput);
+            }
+            else
+            {
+                submittedUser.push({name: nameInput.value, email: emailInput.value});            
+                
+                //update local storage item
+                localStorage.setItem('users', JSON.stringify(submittedUser));
+                
+                //Success state
+                submitBtn.style.backgroundColor = 'green';
+                submitBtn.innerHTML = 'Success';
+                
+                //reset field values
+                nameInput.value = '';
+                emailInput.value = '';
+            }    
+          }
+        });
+        
          //form listener for focus on input fields
         form.addEventListener('focus', (event)=>
         {
