@@ -25,18 +25,25 @@ new Vue({
      {
         checkSubmit: function()
         {
-            if(this.$refs.nameInput.getAttribute("aria-invalid") === 'false' && this.$refs.emailInput.getAttribute("aria-invalid") === 'false')
+            if(this.$refs.nameInput.value != "" || this.$refs.emailInput.value != "")
             {
+                //Valid form entries state
                 this.$refs.formSubmit.removeAttribute('disabled');
-                this.$refs.formSubmit.style.backgroundColor = '#3385ff';
-                
-                this.isValid = true;
+                this.$refs.formSubmit.style.backgroundColor = '#3385ff';           
             }
-            else{
+           else
+           {
+                //Default State
                 this.$refs.formSubmit.setAttribute('disabled', '');
                 this.$refs.formSubmit.style.backgroundColor = 'grey';
-                this.sumbitValue = false;
-                
+           }
+            
+            if(this.$refs.nameInput.getAttribute("aria-invalid") === 'false' && this.$refs.emailInput.getAttribute("aria-invalid") === 'false' && this.$refs.nameInput.value != "" && this.$refs.emailInput.value != "")
+            {
+                this.isValid = true;
+            }
+            else
+            {
                 this.isValid = false;
             }
         },

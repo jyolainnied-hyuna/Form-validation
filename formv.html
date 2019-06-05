@@ -155,19 +155,28 @@
         //checks if form has valid input and if it does the disabled attribute is removed from button tag
        function checkSubmitBtn()
        {
-            if(nameInput.getAttribute("aria-invalid") === 'false' && emailInput.getAttribute("aria-invalid") === 'false' && nameInput.value != "" && emailInput.value != "")
+           if(nameInput.value != "" || emailInput.value != "")
             {
                 //Valid form entries state
                 submitBtn.removeAttribute('disabled');
                 submitBtn.style.backgroundColor = '#3385ff';
-                submitBtn.style.border = 'none';
-                return true;
+                submitBtn.style.border = 'none';            
             }
-            else{
+           else
+           {
                 //Default State
                 submitBtn.setAttribute('disabled', '');
                 submitBtn.style.backgroundColor = 'grey';   
                 submitBtn.style.border = 'none';
+           }
+           
+            if(nameInput.getAttribute("aria-invalid") === 'false' && emailInput.getAttribute("aria-invalid") === 'false' && nameInput.value != "" && emailInput.value != "")
+            {
+             
+                return true;
+            }
+            else{
+             
                 return false;
             }
        }
