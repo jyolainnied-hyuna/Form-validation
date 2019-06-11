@@ -1,0 +1,58 @@
+body{
+    background-color: lightgrey;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    align-content: center;
+}
+
+input{
+    display: block;
+    padding: 0.5em;
+    border-radius: 5%;
+    width: 90%;
+    border: 1px solid lightgrey;
+    margin-top: 0.25em;
+}
+
+small
+{
+    display: block;
+    color: red;
+    margin-top: 0.5em;
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+label
+{
+    margin: 0.5em;
+}
+
+#main{
+    width: 50%;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10%;
+    align-content: center;
+    margin: auto;
+    padding: 2em;
+}
+
+#form-submit
+{
+    background-color: grey;
+    border: none;
+    border-radius: 5%;
+    color: #fff;
+    padding: 1em;
+    width: 50%;
+    text-align: center;
+}
+
+
+#form-submit:hover
+{
+    opacity: 0.6;
+}
+
+
+
+

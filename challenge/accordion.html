@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="accordion.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Accordion</title>
+</head>
+<body>
+    <div id="accordion">
+        <button class="accordion-section" aria-control="content-1" aria-expanded='false' tabindex="1">
+            <span>First</span>
+            <i class="material-icons" value="1">arrow_drop_down</i> 
+        </button>
+        <div aria-hidden="true" class="accordion-content" id="content-1">
+          <p>Content for first section</p> 
+        </div>
+
+
+        <button class="accordion-section" aria-control="content-2" aria-expanded='false' tabindex="2">
+            <span>Second</span>
+            <i class="material-icons">arrow_drop_down</i> 
+        </button>
+        <div aria-hidden="true" class="accordion-content" id="content-2">
+            <p>Content for second section</p> 
+        </div>
+
+        
+        <button class="accordion-section" aria-control="content-3" aria-expanded='false' tabindex="3">
+            <span>Third</span>
+            <i class="material-icons">arrow_drop_down</i>
+        </button>
+        <div aria-hidden="true" class="accordion-content" id="content-3">
+            <p>Content for third section</p> 
+        </div>
+
+    </div>
+
+
+    <script src="accordion.js"></script>
+</body>
+</html>

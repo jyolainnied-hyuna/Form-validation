@@ -1,0 +1,49 @@
+body{
+    align-content: center;
+}
+
+#accordion{
+    align-content: center;
+    width: 50%;
+}
+
+
+.accordion-section{ 
+    padding:0.5em;
+    text-align: left;
+    max-height: 3em;
+    background-color: lightgrey;
+    border-radius: 0.25em;
+    width: 100%;
+    border: 0.04em solid grey;  
+    margin-bottom: 0.1em;
+    
+}
+
+.accordion-section span{
+    text-align: left;
+    font-weight: bold;
+    font-size:1.2em;
+}
+
+.accordion-section i{
+    float: right;
+}
+
+.accordion-content{
+    padding: 0.5em;
+    
+}
+
+
+h3{
+    margin: 0em;
+}
+
+div[aria-hidden="true"]{
+    display: none;
+}
+
+div[aria-hidden="false"]{
+    display: block;
+}

@@ -1,0 +1,48 @@
+body{
+    background-color: #fff;
+    
+}
+
+#time-container
+{
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 7em;
+    text-align: center;
+    width: 100%;
+}
+
+#button-container
+{
+    padding-top: 2em;
+align-content: center;
+text-align:center;
+  margin: auto;
+  width: 50%;
+
+}
+
+#stop
+{
+    display: inline-block;
+    margin:2%;
+    padding: 1em;
+    background-color: rgb(19, 120, 179);
+    border: 0em;
+    color: #fff;
+    font-size: bold;
+    min-width: 25%;
+}
+
+#reset
+{
+    display: inline-block;  
+    align-content: center;
+    margin: 2%;
+    padding: 1em;
+    background-color: rgb(19, 120, 179);
+    border: 0em;
+    color: #fff;
+    font-size: bold;
+    min-width: 25%;
+}
+

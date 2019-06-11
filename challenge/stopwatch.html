@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Stop watch</title>
+</head>
+<body>
+    <div id="time-container">00:00</div>
+    <div id="button-container">
+        <button id="stop">Start</button>
+        <button id="reset">Reset</button>
+    </div>
+</body>
+
+<script>
+var formatted_time;
+var time_display = document.getElementById('time-container');
+var stop_button = document.getElementById('stop');
+var reset_button = document.getElementById('reset');
+var time = 0;
+var nInteravl;
+
+//Start or Stop button function
+stop_button.addEventListener('click', function()
+{
+    if(stop_button.innerHTML == "Start")
+    {
+        //change text on start button to 'Stop'
+        stop_button.innerHTML = "Stop";
+
+        //set/begin interval function
+        nInteravl = setInterval(increaseTime , 10);
+    }
+    else
+    {
+        //stop interval function
+        clearInterval(nInteravl);
+
+
+        //display current time
+        time_display.textContent = formatted_time;
+        
+        //change text on start button to 'Start'
+        stop_button.innerHTML = "Start";
+    }
+}
+);
+
+//Reset button function
+reset_button.addEventListener('click', function()
+{
+    clearInterval(nInteravl);
+
+    //change text on start button to 'Start'
+    stop_button.innerHTML = "Start";
+
+    //reset the time displayed to 0
+    time_display.textContent = "00:00";
+
+    //reset time variable to 0
+    time = 0;
+});
+
+//Function to increase the time by seconds
+function increaseTime()
+{
+        ++time;
+        var time_format = '00';
+        
+        if(time < 10)
+        {
+            time = time.toString(10).padStart(2, '0');
+            time_display.textContent = '00:' + time;
+            
+        }
+        else if(time < 100)
+        {
+            time_display.textContent = '00:' + time;
+        }
+        else if(time >=100)
+        {
+            var seconds = time/100;
+            var ms = time%100;
+
+            seconds = Math.floor(seconds).toString(10);
+            seconds = seconds.padStart(2, '0');
+
+            formatted_time = seconds + ':' + ms;
+            time_display.textContent = formatted_time;
+        }
+
+}
+</script>
+</html>

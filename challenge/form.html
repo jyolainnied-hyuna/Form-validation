@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="form.css">
+    <title>Form</title>
+</head>
+<body>
+    <div id="main">
+        <form id="form">
+            <label>Name</label>
+            <input id="name-input" name="name" aria-required="true" aria-invalid="false" onblur= "isValid('name', '@','Invalid: Name must be at least 5 characters long.');" >
+            <small id="name-error" name="email" aria-required="true" aria-invalid="false" onblur= "isValid('email', '@','Invalid email address');" ></small><br/>
+
+            <label>Email Address</label>
+            <input id="email-input">
+            <small id="email-error"></small><br/>
+
+            <button id="form-submit">Submit</button>
+
+        </form>
+
+    </div>
+    <script>
+
+        var nameInput = document.getElementById('name-input');
+        var emailInput = document.getElementById('email-input');
+        var nameError = document.getElementById('name-error');
+        var emailError = document.getElementById('email-error');
+        var form = document.getElementById('form');
+        var submitBtn = document.getElementById('form-submit');
+        var isNameError = true; 
+        var isEmailError = true; 
+
+       //disabling submit button
+        submitBtn.setAttribute('disabled', '');
+
+
+       //event listener for name input
+        nameInput.addEventListener('keyup', (event)=>
+        {
+            if(event.target.value.length < 5)
+            {
+                nameError.innerHTML = 'Invalid: Name must be more than 5 characters';
+            }
+            else{
+                nameError.innerHTML = '';
+                isNameError = false;
+            }
+
+            checkSubmitBtn();
+            
+        });
+
+        //event listener for email input
+        emailInput.addEventListener('keyup', (event)=>
+        {
+            if(event.target.value.length < 5)
+            {
+                emailError.innerHTML = 'Invalid';
+            }
+            else{
+                emailError.innerHTML = '';
+                isEmailError = false;
+            }
+
+            checkSubmitBtn();
+            
+        });
+
+        //form listener for focus on input fields
+        form.addEventListener('focus', (event)=>
+        {
+            event.target.style.background = 'lightgrey';
+        },true)
+
+        //form listener for 'unfocus' on input fields
+        form.addEventListener('blur', (event)=>
+        {
+            event.target.style.background = '';
+
+            //checks is input field is empty and adds red border if it is
+            if(event.target.value === '')
+            {
+                event.target.style.border = '1px solid red';
+            }
+            else{
+                event.target.style.border = '1px solid lightgrey';
+            }
+            checkSubmitBtn();
+
+        }, true)
+
+        //checks if form has valid input and if it does the disabled attribute is removed from button tag
+       function checkSubmitBtn()
+       {
+            if(isNameError == false && isEmailError == false)
+                {
+                    submitBtn.removeAttribute('disabled');
+                    submitBtn.style.backgroundColor = 'green';
+                }
+       }
+
+       function isValid(nameAttri, searchTerm, msg)
+       {
+           var inputElement = document.getElementById('nameAttri');
+           
+       }
+
+    </script>
+    
+</body>
+</html>
