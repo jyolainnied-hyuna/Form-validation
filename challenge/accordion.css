@@ -1,23 +1,23 @@
-body{
-    align-content: center;
-}
-
 #accordion{
+    margin:auto;
     align-content: center;
     width: 50%;
 }
-
 
 .accordion-section{ 
     padding:0.5em;
     text-align: left;
     max-height: 3em;
-    background-color: lightgrey;
+    background-color: #e0e0d1;
     border-radius: 0.25em;
     width: 100%;
     border: 0.04em solid grey;  
-    margin-bottom: 0.1em;
-    
+    margin-bottom: 0.2em;
+    cursor: pointer;
+}
+
+.accordion-section:hover{ 
+    background-color: #ccccb3; 
 }
 
 .accordion-section span{
@@ -32,18 +32,30 @@ body{
 
 .accordion-content{
     padding: 0.5em;
+    border: 0.09em solid #e0e0d1;
+    margin-top: -0.2em;
     
 }
 
-
-h3{
-    margin: 0em;
+button[aria-expanded='true']{
+    background-color: #c2c2a3;
 }
 
 div[aria-hidden="true"]{
-    display: none;
+      display: none;
 }
 
 div[aria-hidden="false"]{
-    display: block;
+    animation: 2s fadeIn;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0%  {
+        opacity: 0;
+        }
+    100% {
+        display: block;
+        opacity: 1;
+      }
 }
